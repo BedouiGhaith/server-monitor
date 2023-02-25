@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import {GET_ERRORS, GET_SERVER_ERRORS, SET_CURRENT_USER, SET_SERVER_STATUS} from "./types.js";
+import {GET_ERRORS, GET_SERVER_ERRORS, SET_SERVER_STATUS} from "./types.js";
 
 export const addServer = (serverData, history) => dispatch => {
     axios
@@ -15,11 +15,12 @@ export const addServer = (serverData, history) => dispatch => {
         );
 };
 
-export const connectToServer = (serverId, userId) => dispatch => {
+export const connectToServer = (serverId, userId, cmd) => dispatch => {
 
     const connectionData = {
         user: userId,
         server: serverId,
+        option: cmd
     };
     return axios
         .post("/api/servers/connectToServer/", connectionData)

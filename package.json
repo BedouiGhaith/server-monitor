@@ -26,6 +26,7 @@
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
     "ssh2": "^1.11.0",
+    "topparser": "^1.0.3",
     "validator": "^10.9.0"
   }
 }

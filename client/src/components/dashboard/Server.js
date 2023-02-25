@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import '../styles/fab.css';
 import '../styles/my_servers.css';
+import '../styles/loading.css';
 import { connectToServer } from '../../actions/serverActions.js';
+import ProcessTable from "../component/processTable.js";
 
 class Server extends Component {
     constructor(props) {
@@ -11,6 +13,7 @@ class Server extends Component {
         this.state = {
             isFetching: false,
             connection: null,
+            option:"processes",
             server: ''
         };
     }
@@ -21,7 +24,7 @@ class Server extends Component {
         } else {
             const { user } = this.props.auth;
             const serverId = this.props.match.params.id;
-            this.props.connectToServer(serverId, user.id);
+            this.props.connectToServer(serverId, user.id, this.state.option);
         }
     }
 
@@ -33,12 +36,16 @@ class Server extends Component {
 
     render() {
         const { connection } = this.state;
-        return (
+
+        return (<div style={((this.props.serverError === "") && (connection == null)) ?{
+            display: "flex", justifyContent: "center", alignItems: "center", height:"92.5%", width:"100%", position: "absolute"}: {alignItems: "center"}}>
+                {(this.props.serverError === "" && connection == null) && <div className="loader"></div>}
             <div>
-                {connection != null && <div>{connection.toString()}</div>}
-                <div>{this.props.serverError !== {} && <div>{this.props.serverError.toString()}</div>}
+                {connection != null && <div><ProcessTable data={connection.processes[0]}></ProcessTable></div>}
+                <div>{this.props.serverError !== "" && <div>{this.props.serverError.toString()}</div>}
                 </div>
             </div>
+        </div>
         );
     }
 }

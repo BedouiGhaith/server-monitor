@@ -7,6 +7,7 @@ const mongoose = require("mongoose");
 
 
 const { Client } = require('ssh2');
+const topparser = require("../../utils/topParser");
 
 function connectToSSHServer(server) {
     return new Promise((resolve, reject) => {
@@ -25,6 +26,30 @@ function connectToSSHServer(server) {
             password: server.password
         });
     });
+}
+function cmdOption(conn, option, res){
+
+    switch (option) {
+        case 'processes':
+            console.log('Processes');
+            conn.exec('top -n 1 -b', (err, stream) => {
+                if (err) {
+                    console.log(`Command execution error: ${err.message}`);
+                    throw err;
+                }
+                stream.on('data', (data) => {
+                    let topData=topparser(data+"")
+                    console.log(`Received data: ${JSON.stringify(topData.processes[0],0,2)}`);
+                    res.status(200).send(topData)
+                }).on('close', (code, signal) => {
+                    console.log(`Command execution closed with code ${code} and signal `+ signal);
+                });
+            })
+            break;
+        default:
+            res.status(404).json(`NO OPTION FOR ${option}.`);
+            console.log(`NO OPTION FOR ${option}.`);
+    }
 }
 
 
@@ -70,20 +95,27 @@ router.post('/connectToServer', async (req, res) => {
                     }
                     if (results !== null) {
                         try {
-                            const conn = await connectToSSHServer({
+                            connectToSSHServer({
                                 host: results.ip,
                                 username: results.username,
                                 password: results.password
+                            }).then((conn) => {
+                                cmdOption(conn,req.body.option,res)}
+                                // Connection successful, do something with the `conn` object
+                                ).catch((err) => {
+                                // Connection failed, handle the error
+                                console.log(`SSH connection error: ${err.message}`);
                             });
-                            // Do something with the SSH client connection
-                            res.status(200).json('SSH connection successful');
+
                         } catch (err) {
-                            res.status(404).json(`SSH connection error: ${err.message}`);
+                            res.status(404).json(`SSH connection error: ${err.message}... Make sure you've entered the correct server info!`);
                         }
                     } else res.status(404).json("Server Not Found")
                 })
             } else res.status(404).json("User Not Found")
         })
     });
+
+
 
 module.exports = router;
