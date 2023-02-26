@@ -6,6 +6,7 @@ import '../styles/my_servers.css';
 import '../styles/loading.css';
 import { connectToServer } from '../../actions/serverActions.js';
 import ProcessTable from "../component/processTable.js";
+import OverviewTable from "../component/overviewTable";
 
 class Server extends Component {
     constructor(props) {
@@ -14,7 +15,7 @@ class Server extends Component {
             isFetching: false,
             connection: null,
             option:"processes",
-            server: ''
+            server: this.props.match.params.id
         };
     }
 
@@ -23,8 +24,8 @@ class Server extends Component {
             this.props.history.push('/login');
         } else {
             const { user } = this.props.auth;
-            const serverId = this.props.match.params.id;
-            this.props.connectToServer(serverId, user.id, this.state.option);
+            this.setState({ ...this.state, server: this.props.match.params.id });
+            this.props.connectToServer(this.state.server, user.id, this.state.option);
         }
     }
 
@@ -36,15 +37,22 @@ class Server extends Component {
 
     render() {
         const { connection } = this.state;
+        const {server} = this.state
+        if (connection!==null) {
+            console.log(server)
+        }
 
         return (<div style={((this.props.serverError === "") && (connection == null)) ?{
-            display: "flex", justifyContent: "center", alignItems: "center", height:"92.5%", width:"100%", position: "absolute"}: {alignItems: "center"}}>
+            display: "flex", justifyContent: "center", alignItems: "center", height:"92.5%", width:"100%", position: "absolute"}: {display: "flex",justifyContent: "space-between",alignItems: "center"}}>
                 {(this.props.serverError === "" && connection == null) && <div className="loader"></div>}
-            <div>
-                {connection != null && <div><ProcessTable data={connection.processes[0]}></ProcessTable></div>}
+                {connection != null && <>
+                    <ProcessTable data={connection.processes[0]} serverId={server}>
+                    </ProcessTable>
+                    <OverviewTable data={connection} >
+                    </OverviewTable>
+                </>}
                 <div>{this.props.serverError !== "" && <div>{this.props.serverError.toString()}</div>}
                 </div>
-            </div>
         </div>
         );
     }

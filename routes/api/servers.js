@@ -27,29 +27,48 @@ function connectToSSHServer(server) {
         });
     });
 }
-function cmdOption(conn, option, res){
-
-    switch (option) {
-        case 'processes':
+async function cmdOption(conn, option, res) {
+    console.log(option);
+    if (option==="processes"){
             console.log('Processes');
             conn.exec('top -n 1 -b', (err, stream) => {
-                if (err) {
-                    console.log(`Command execution error: ${err.message}`);
-                    throw err;
-                }
-                stream.on('data', (data) => {
-                    let topData=topparser(data+"")
-                    console.log(`Received data: ${JSON.stringify(topData.processes[0],0,2)}`);
-                    res.status(200).send(topData)
-                }).on('close', (code, signal) => {
-                    console.log(`Command execution closed with code ${code} and signal `+ signal);
-                });
-            })
-            break;
-        default:
-            res.status(404).json(`NO OPTION FOR ${option}.`);
-            console.log(`NO OPTION FOR ${option}.`);
+                executeCMD(err, stream,option, res)
+            });
+    } else if (option.startsWith('sudo kill')) {
+        console.log('kill process');
+        conn.exec(option, (err, stream) => {
+            executeCMD(err, stream,option, res)
+        });
+    } else {
+        res.status(404).json(`NO OPTION FOR ${option}.`);
+        console.log(`NO OPTION FOR ${option}.`);
     }
+}
+
+function executeCMD (err, stream,cmd, res) {
+    if (err) {
+        console.log(`Command execution error: ${err.message}`);
+        throw err;
+    }
+
+    let dataBuffer = Buffer.from('');
+    let response
+    stream.on('data', (data) => {
+        response = data
+        dataBuffer = Buffer.concat([dataBuffer, data]);
+    });
+
+    stream.on('end', (code) => {
+        if (cmd.startsWith("processes")) {
+            const topData = topparser(dataBuffer.toString());
+            res.status(200).send(topData);
+        } else if (code!==0) {
+            res.status(400).json("Insufficient Privileges!");
+        } else res.status(200)
+        console.log(response)
+    }).on('close', (code) => {
+        console.log(`Command execution closed with code ${code} `);
+    });
 }
 
 
@@ -83,28 +102,28 @@ router.post("/get_servers", (req, res) => {
 
 router.post('/connectToServer', async (req, res) => {
     console.log(req.body.user+":"+req.body.server)
-        await   User.findById(mongoose.Types.ObjectId((req.body.user)), async function (err, results) {
+        await User.findById(mongoose.Types.ObjectId((req.body.user)), async function (err, results) {
             if (err) {
                 res.status(404).json(err)
             }
             console.log(results)
             if (results !== null) {
-                Server.findById((mongoose.Types.ObjectId(req.body.server)), async function (err, results) {
+                await Server.findById((mongoose.Types.ObjectId(req.body.server)), async function (err, results) {
                     if (err) {
                         res.status(404).json(err)
                     }
                     if (results !== null) {
                         try {
-                            connectToSSHServer({
-                                host: results.ip,
+                            await connectToSSHServer({
+                                  host: results.ip,
                                 username: results.username,
                                 password: results.password
-                            }).then((conn) => {
-                                cmdOption(conn,req.body.option,res)}
-                                // Connection successful, do something with the `conn` object
-                                ).catch((err) => {
-                                // Connection failed, handle the error
-                                console.log(`SSH connection error: ${err.message}`);
+                            }).then(async (conn) => {
+                                    // Connection successful, do something with the `conn` object
+                                    await cmdOption(conn, req.body.option, res)
+                                }).catch((err) => {
+                                    // Connection failed, handle the error
+                                    console.log(`SSH connection error: ${err.message}`);
                             });
 
                         } catch (err) {
