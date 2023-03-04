@@ -8,11 +8,12 @@ const mongoose = require("mongoose");
 
 const { Client } = require('ssh2');
 const topparser = require("../../utils/topParser");
+const privParser = require("../../utils/privParser");
 
-function connectToSSHServer(server) {
+
+async function connectToSSHServer(server) {
     return new Promise((resolve, reject) => {
         const conn = new Client();
-
         conn.on('ready', () => {
             console.log('SSH connection successful');
             resolve(conn);
@@ -27,50 +28,85 @@ function connectToSSHServer(server) {
         });
     });
 }
-async function cmdOption(conn, option, res) {
+
+function executeSudoCommand(conn, option, res) {
     console.log(option);
-    if (option==="processes"){
-            console.log('Processes');
-            conn.exec('top -n 1 -b', (err, stream) => {
-                executeCMD(err, stream,option, res)
-            });
+    const password = '08041997';
+    let output = '';
+
+    conn.shell((err, stream) => {
+        if (err) {
+            console.log(`Command execution error: ${err.message}`);
+            throw err;
+        }
+        stream.on('end', async _ => {
+            console.log(`Command execution ended`);
+            res.status(200).json(await parser(output, option));
+        }).on('data', (data) => {
+            console.log(`STDOUT: ${data}`);
+            if (data.indexOf('Password') > -1) {
+                stream.end(`${password}\n${option}\nexit\nexit\n`);
+            } else {
+                output += data;
+            }
+        });
+        stream.write(`su\n`);
+    })
+}
+
+async function cmdOption(conn, option, res) {
+    if (option === "processes") {
+        console.log('Processes');
+        conn.exec('top -n 1 -b', (err, stream) => {
+            executeCMD(err, stream, option, res)
+        });
     } else if (option.startsWith('sudo kill')) {
         console.log('kill process');
-        conn.exec(option, (err, stream) => {
-            executeCMD(err, stream,option, res)
-        });
+        executeSudoCommand(conn, option, res);
+    } else if (option.startsWith('sudo -l')) {
+        console.log('privileges');
+        executeSudoCommand(conn, option, res);
     } else {
         res.status(404).json(`NO OPTION FOR ${option}.`);
         console.log(`NO OPTION FOR ${option}.`);
     }
 }
 
-function executeCMD (err, stream,cmd, res) {
+function executeCMD(err, stream, cmd, res) {
     if (err) {
         console.log(`Command execution error: ${err.message}`);
         throw err;
     }
 
     let dataBuffer = Buffer.from('');
-    let response
+    let response;
+
     stream.on('data', (data) => {
-        response = data
+        response = data;
         dataBuffer = Buffer.concat([dataBuffer, data]);
     });
-
     stream.on('end', (code) => {
-        if (cmd.startsWith("processes")) {
-            const topData = topparser(dataBuffer.toString());
-            res.status(200).send(topData);
-        } else if (code!==0) {
-            res.status(400).json("Insufficient Privileges!");
-        } else res.status(200)
-        console.log(response)
+        console.log(code)
+        if (code) {
+            res.status(400).json('Insufficient Privileges!');
+        } else res.status(200).json(parser(dataBuffer,cmd));
+        console.log(response);
     }).on('close', (code) => {
-        console.log(`Command execution closed with code ${code} `);
+        console.log(`Command execution closed with code ${code}`);
     });
 }
 
+function parser(data, option){
+    console.log(data)
+    console.log(option)
+    if (option.startsWith('processes')) {
+        return topparser(data.toString());
+    }
+    if (option.startsWith('sudo -l')) {
+        return privParser(data.toString());
+    }
+    return data
+}
 
 router.post("/add_server", (req, res) => {
     console.log(req.body.owner)
@@ -124,6 +160,8 @@ router.post('/connectToServer', async (req, res) => {
                                 }).catch((err) => {
                                     // Connection failed, handle the error
                                     console.log(`SSH connection error: ${err.message}`);
+                                    res.status(404).json(`SSH connection error: ${err.message}`);
+
                             });
 
                         } catch (err) {

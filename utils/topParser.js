@@ -51,17 +51,7 @@ function parseProcessLine(str,error){
         }
     }catch(err){error(err)}
     return result
-}//parseRootTopLine
-
-
-
-
-
-// {
-//     pid_limit:10,//limit number of included pids in list (default: unlimited)
-//     pid_filter:(proc)=>{return proc.user=="root"?proc:null},// filtering the pid list (for example: include only pid with user == root) (default: null)
-//     pid_sort:(a,b)=>{return a.cpu-b.cpu},// sorting pid list by cpu usage (default)
-// }
+}
 
 module.exports=function(data,options={pid_sort(a,b){return a.cpu-b.cpu}},error=(error)=>{/*parser error messages*/ console.log(error)}){
     var data=data.split("\n").filter(v=>v!="")
