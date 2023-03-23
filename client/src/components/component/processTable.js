@@ -1,24 +1,14 @@
 import React from 'react';
 import  '../styles/process_table.css'
-import PropTypes from "prop-types";
-import {connect} from "react-redux";
-import {connectToServer} from "../../actions/serverActions.js";
-
-let onKillClick = (e,pid, serverId, userId, connectToServer) => {
-    e.preventDefault();
-    connectToServer(serverId, userId, "sudo kill -9 "+pid);
-};
+import {PROCESS_KILLING} from "../../actions/types.js";
 
 function processTable(props) {
-    const { data, serverId } = props;
+    const { user, data, serverId } = props;
 
-    // Check if the data prop is defined
-    if (!data) {
-        return null;
-    }
-
-    const { user } = props.auth;
-
+    let onKillClick = (e,pid, serverId, userId, connectToServer) => {
+        e.preventDefault();
+        connectToServer(serverId, userId, "sudo kill -9 "+pid, PROCESS_KILLING);
+    };
     return (
         <table className="table-process">
             <thead className="thead-process">
@@ -55,18 +45,4 @@ function processTable(props) {
     );
 }
 
-processTable.propTypes = {
-    status: PropTypes.object.isRequired,
-    connectToServer: PropTypes.func.isRequired,
-    auth: PropTypes.object.isRequired,
-    serverError: PropTypes.string.isRequired,
-    serverId: PropTypes.string.isRequired
-};
-
-const mapStateToProps = state => ({
-    auth: state.auth,
-    serverError: state.serverError,
-    status: state.server
-});
-
-export default connect(mapStateToProps, { connectToServer })(processTable);
+export default processTable;

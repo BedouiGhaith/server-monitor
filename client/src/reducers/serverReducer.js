@@ -1,8 +1,6 @@
-import { SET_SERVER_STATUS } from "../actions/types";
+import {PROCESS_KILLING, SET_SERVER_STATUS} from "../actions/types";
 
-const initialState = {
-    data: null
-};
+const initialState = {};
 
 export default function(state = initialState, action) {
     switch (action.type) {
@@ -11,7 +9,11 @@ export default function(state = initialState, action) {
                 ...state,
                 data: action.payload
             };
-        default:
+        case PROCESS_KILLING:
+            return {
+                ...state,
+            };
+            default:
             return state;
     }
 }

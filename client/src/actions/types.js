@@ -1,3 +1,4 @@
+export const PROCESS_KILLING= "PROCESS_KILLING";
 export const GET_SERVER_ERRORS= "GET_SERVER_ERRORS";
 export const GET_ERRORS = "GET_ERRORS";
 export const USER_LOADING = "USER_LOADING";

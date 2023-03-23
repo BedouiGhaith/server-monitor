@@ -1,4 +1,7 @@
-const express = require("express");
+const express = require('express');
+const app = express();
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
 const router = express.Router();
 
 const User = require("../../models/User");
@@ -7,8 +10,11 @@ const mongoose = require("mongoose");
 
 
 const { Client } = require('ssh2');
+
 const topparser = require("../../utils/topParser");
 const privParser = require("../../utils/privParser");
+const res = require("express/lib/response");
+const {parseMemoryInfo, parseGrepMemoryLog} = require("../../utils/ramLogParser");
 
 
 async function connectToSSHServer(server) {
@@ -29,9 +35,9 @@ async function connectToSSHServer(server) {
     });
 }
 
-function executeSudoCommand(conn, option, res) {
+function executeSudoCommand(conn, option, res, sudoPass) {
     console.log(option);
-    const password = '08041997';
+    const password = sudoPass;
     let output = '';
 
     conn.shell((err, stream) => {
@@ -41,28 +47,39 @@ function executeSudoCommand(conn, option, res) {
         }
         stream.on('end', async _ => {
             console.log(`Command execution ended`);
+            console.log(output)
+            conn.end()
             res.status(200).json(await parser(output, option));
         }).on('data', (data) => {
-            console.log(`STDOUT: ${data}`);
             if (data.indexOf('Password') > -1) {
                 stream.end(`${password}\n${option}\nexit\nexit\n`);
             } else {
                 output += data;
+
             }
         });
         stream.write(`su\n`);
     })
 }
 
-async function cmdOption(conn, option, res) {
-    if (option === "processes") {
+async function cmdOption(conn, option, res, sudoPass) {
+    if (!option || option ==="") {
+        console.log('nothing');
+        return res.json("nothing chosen").status(200)
+    } else if (option === "processes") {
         console.log('Processes');
         conn.exec('top -n 1 -b', (err, stream) => {
-            executeCMD(err, stream, option, res)
+            executeCMD(err, stream, option, res, conn)
         });
     } else if (option.startsWith('sudo kill')) {
         console.log('kill process');
-        executeSudoCommand(conn, option, res);
+        executeSudoCommand(conn, option, res, sudoPass);
+    } else if (option.startsWith('dmesg | grep -i memory')) {
+        console.log('ram diag');
+        executeSudoCommand(conn, option+ " --color=never", res, sudoPass);
+    } else if (option.startsWith('grep -i -r \'memory\' /var/log/')) {
+        console.log('ram var log');
+        executeSudoCommand(conn, option+ " --color=never", res, sudoPass);
     } else if (option.startsWith('sudo -l')) {
         console.log('privileges');
         executeSudoCommand(conn, option, res);
@@ -72,7 +89,7 @@ async function cmdOption(conn, option, res) {
     }
 }
 
-function executeCMD(err, stream, cmd, res) {
+function executeCMD(err, stream, cmd, res, conn) {
     if (err) {
         console.log(`Command execution error: ${err.message}`);
         throw err;
@@ -87,6 +104,7 @@ function executeCMD(err, stream, cmd, res) {
     });
     stream.on('end', (code) => {
         console.log(code)
+        conn.end()
         if (code) {
             res.status(400).json('Insufficient Privileges!');
         } else res.status(200).json(parser(dataBuffer,cmd));
@@ -97,7 +115,6 @@ function executeCMD(err, stream, cmd, res) {
 }
 
 function parser(data, option){
-    console.log(data)
     console.log(option)
     if (option.startsWith('processes')) {
         return topparser(data.toString());
@@ -105,7 +122,15 @@ function parser(data, option){
     if (option.startsWith('sudo -l')) {
         return privParser(data.toString());
     }
-    return data
+    if (option.startsWith('dmesg | grep -i memory')) {
+        data.replaceAll("STDOUT: ","")
+        return parseMemoryInfo(data.toString());
+    }
+    if (option.startsWith('grep -i -r \'memory\' /var/log/')) {
+        data.replaceAll("STDOUT: ","")
+        return parseGrepMemoryLog(data.toString());
+    }
+    return {"data":data}
 }
 
 router.post("/add_server", (req, res) => {
@@ -156,14 +181,12 @@ router.post('/connectToServer', async (req, res) => {
                                 password: results.password
                             }).then(async (conn) => {
                                     // Connection successful, do something with the `conn` object
-                                    await cmdOption(conn, req.body.option, res)
+                                    await cmdOption(conn, req.body.option, res, results.password)
                                 }).catch((err) => {
                                     // Connection failed, handle the error
                                     console.log(`SSH connection error: ${err.message}`);
                                     res.status(404).json(`SSH connection error: ${err.message}`);
-
                             });
-
                         } catch (err) {
                             res.status(404).json(`SSH connection error: ${err.message}... Make sure you've entered the correct server info!`);
                         }
@@ -172,6 +195,50 @@ router.post('/connectToServer', async (req, res) => {
             } else res.status(404).json("User Not Found")
         })
     });
+
+router.post('/ramUsage', async (req, res) => {
+    console.log(req.body.user + ":" + req.body.server);
+    try {
+        const user = await User.findById(req.body.user);
+        if (!user) {
+            return res.status(404).json("User Not Found");
+        }
+
+        const server = await Server.findById(req.body.server);
+        if (!server) {
+            return res.status(404).json("Server Not Found");
+        }
+
+        const conn = await connectToSSHServer({
+            host: server.ip,
+            username: server.username,
+            password: server.password
+        });
+
+        const buffer = [];
+        conn.exec('free -m', (err, stream) => {
+            if (err) {
+                throw err;
+            }
+            stream.on('data', (data) => {
+                buffer.push(data);
+            });
+            stream.on('end', () => {
+                const lines = Buffer.concat(buffer).toString().split('\n');
+                const usage = lines[1].split(/\s+/).filter(Boolean);
+                res.status(200).json({
+                    total: usage[1],
+                    used: usage[2],
+                    free: usage[3]
+                });
+                conn.end()
+            });
+        });
+    } catch (err) {
+        console.log(`SSH connection error: ${err.message}`);
+        res.status(404).json(`SSH connection error: ${err.message}... Make sure you've entered the correct server info!`);
+    }
+});
 
 
 
