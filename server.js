@@ -8,6 +8,7 @@ const servers = require("./routes/api/servers");
 
 
 const cors=require("cors");
+const {startMonitoring} = require("./routes/api/ramAuto");
 const corsOptions ={
     origin:'*',
     credentials:true,            //access-control-allow-credentials:true
@@ -47,5 +48,7 @@ app.use("/api/servers", servers);
 
 
 const port = process.env.PORT || 5000;
+
+startMonitoring()
 
 app.listen(port, () => console.log(`Server up and running on port ${port} !`));

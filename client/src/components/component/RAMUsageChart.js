@@ -3,9 +3,10 @@ import axios from "axios";
 import CanvasJSReact from '../../assets/canvasjs.react';
 import GaugeChart from "./GaugeChart.js";
 
+
 const CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
-var data = new Array(10).fill(0);
+const data = new Array(10).fill(0);
 let currentRamCap = 1
 
 function RamUsageChart(props) {
@@ -13,9 +14,8 @@ function RamUsageChart(props) {
 
     function ramUsagePer(used, total){
         if(used.used) {
-            console.log(used.used + ":" + total + "=" + Math.round(parseInt(used.used) * 100 / parseInt(total)))
             return Math.round(parseInt(used.used) * 1000 / parseInt(total)) / 10
-        }
+        } else return null
     }
 
 
@@ -27,12 +27,10 @@ function RamUsageChart(props) {
         return axios
             .post("/api/servers/RAMUsage/", connectionData)
             .then(response => {
-                console.log(response)
                 currentRamCap = response.data.total
                 setRamUsage(response.data);
                 data.shift()
                 data.push(response.data)
-                console.log(data[9])
             })
             .catch(err => {
                 console.log(err)
@@ -54,7 +52,7 @@ function RamUsageChart(props) {
         exportEnabled: true,
         theme: "light2", // "light1", "dark1", "dark2"
         title:{
-            text: "Bounce Rate by Week of Year"
+            text: "RAM Usage"
         },
         axisY: {
             title: "Usage",

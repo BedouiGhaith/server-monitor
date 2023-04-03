@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {connectToServer} from "../../actions/serverActions.js";
 import RAMUsageChart from "../component/RAMUsageChart";
+import RAMLog from "../component/RAMLog.js";
+import LinearChart from "../component/LinearChart.js";
 
 class RAMDashboard extends Component {constructor(props) {
     super(props);
@@ -14,9 +16,12 @@ class RAMDashboard extends Component {constructor(props) {
 
     render() {
         const {server} = this.state
-        const { user } = this.props.auth;        return (
+        const { user } = this.props.auth;
+        return (
             <div>
+                <LinearChart userId={user.id} serverId={server}></LinearChart>
                <RAMUsageChart userId={user.id} serverId={server} ></RAMUsageChart>
+                <RAMLog userId={user.id} serverId={server}></RAMLog>
             </div>
         );
     }

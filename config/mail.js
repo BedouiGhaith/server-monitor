@@ -3,7 +3,7 @@ const dotenv =require ("dotenv")
 
 dotenv.config()
 
-function sendEmail(email, code) {// Use Smtp Protocol to send Email
+function sendEmail(email, code, issue) {// Use Smtp Protocol to send Email
     let smtpTransport = nodemailer.createTransport({
         service: 'gmail',
         port:465,
@@ -18,12 +18,20 @@ function sendEmail(email, code) {// Use Smtp Protocol to send Email
         }
     })
 
-    const mail = {
+    let mail = {
         from: "MedTech@gmail.com",
         to: email,
         subject: "Action Confirmation",
         text: "Your code is: " + code,
     };
+    if (issue === "high_current_ram_usage"){
+        mail = {
+            from: "MedTech@gmail.com",
+            to: email,
+            subject: "Alert: High Ram Usage",
+            text: code + "" ,
+        };
+    }
 
     smtpTransport.sendMail(mail, function (error, response) {
         if (error) {

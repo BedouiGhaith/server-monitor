@@ -49,6 +49,7 @@ async function parseGrepMemoryLog(output) {
                 description,
                 cause: "",
                 solution: "",
+                pid: -1
             };
             if (error === "Out of memory") {
                 // Analyze the error message to determine the cause and possible solution
@@ -56,6 +57,7 @@ async function parseGrepMemoryLog(output) {
                     const processParts = description.split(" ");
                     const pid = processParts[2];
                     const score = processParts[5];
+                    parsedLog.pid = pid;
                     parsedLog.cause = `The process with PID ${pid} was killed due to out-of-memory conditions. It had a score of ${score}, indicating that it was using a significant amount of memory.`;
                     parsedLog.solution = `To prevent this from happening in the future, you can try reducing the memory usage of the process, or add more memory to the system.`;
                 } else if (description.startsWith("oom-kill")) {

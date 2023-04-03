@@ -5,6 +5,8 @@
   "type": "module",
   "dependencies": {
     "@nivo/line": "^0.80.0",
+    "@progress/kendo-react-charts": "^5.12.1",
+    "@progress/kendo-react-dropdowns": "^5.12.1",
     "axios": "^0.18.0",
     "classnames": "^2.2.6",
     "customize-cra": "^1.0.0",
@@ -13,6 +15,7 @@
     "prop-types": "^15.8.1",
     "proptypes": "^1.1.0",
     "react": "^16.6.3",
+    "react-apexcharts": "^1.4.0",
     "react-bootstrap": "^2.7.2",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^16.6.3",

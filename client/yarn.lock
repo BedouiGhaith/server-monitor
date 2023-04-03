@@ -1007,6 +1007,150 @@
   "resolved" "https://registry.npmjs.org/@popperjs/core/-/core-2.11.6.tgz"
   "version" "2.11.6"
 
+"@progress/kendo-charts@^1.27.0":
+  "integrity" "sha512-UltOmnbBzkFneq6vuJFbWHmmaMDDLiW2HujKQJcwjH19Ky0Yup5pRGpIeOI26dOdRe/7fLJFBx+4NnJjNrp8Cg=="
+  "resolved" "https://registry.npmjs.org/@progress/kendo-charts/-/kendo-charts-1.28.0.tgz"
+  "version" "1.28.0"
+
+"@progress/kendo-draggable-common@^0.2.3":
+  "integrity" "sha512-e1FraFsT7zwevswzZlQYL//K+fzmRUvkr/4emp51dzkARLDtGd95BtPNSoXYRG5xYHeueKBS75hzVwQI6Dm3Dg=="
+  "resolved" "https://registry.npmjs.org/@progress/kendo-draggable-common/-/kendo-draggable-common-0.2.3.tgz"
+  "version" "0.2.3"
+  dependencies:
+    "tslib" "^1.7.0"
+
+"@progress/kendo-drawing@^1.0.0", "@progress/kendo-drawing@^1.17.2":
+  "integrity" "sha512-aG71C3KiJWf7DP5c4B/UwrjbYbsYoeXe+WqR1XhEDyaLHa38xki8utqVrJ3+c3t1mlEtGTW8uz46bJ89N1sLag=="
+  "resolved" "https://registry.npmjs.org/@progress/kendo-drawing/-/kendo-drawing-1.17.5.tgz"
+  "version" "1.17.5"
+  dependencies:
+    "@progress/pako-esm" "^1.0.1"
+
+"@progress/kendo-intl@^3.1.1":
+  "integrity" "sha512-Dv+j4rQTSODq3EMTlzvWMBsDmnbupAgMUFmVG6wbgg29xtvQTYDoKej4m3POazh7BitdlascbP+2bqs/9Xcm3g=="
+  "resolved" "https://registry.npmjs.org/@progress/kendo-intl/-/kendo-intl-3.1.1.tgz"
+  "version" "3.1.1"
+
+"@progress/kendo-licensing@^1.3.0":
+  "integrity" "sha512-Bp5MUX6wVHVUW8ZJUNcFVw9/KwRvP/a9zg2gAwRhpHVlwrSPbIpCMoBRRk32CEzC1tpUsIuQywT95+97HXZDTg=="
+  "resolved" "https://registry.npmjs.org/@progress/kendo-licensing/-/kendo-licensing-1.3.0.tgz"
+  "version" "1.3.0"
+  dependencies:
+    "jsonwebtoken" "^9.0.0"
+
+"@progress/kendo-popup-common@1.9.0":
+  "integrity" "sha512-03FmQtRI2le3x78N1szlhtUkOyruq9aSf2SYCoyvd72mX9V9yAbqsoKByuFDazEbjHyHFkAmj32GrimWHevLCg=="
+  "resolved" "https://registry.npmjs.org/@progress/kendo-popup-common/-/kendo-popup-common-1.9.0.tgz"
+  "version" "1.9.0"
+
+"@progress/kendo-react-animation@^5.0.0", "@progress/kendo-react-animation@5.12.1":
+  "integrity" "sha512-dHWZcqrVt6AeMUnyJ3kxetw47VAiGVhKUvapGprdm86S95STxaYpmtbgO6Mtbycf9VE/Cuxc25/jIHZ0B8hoLw=="
+  "resolved" "https://registry.npmjs.org/@progress/kendo-react-animation/-/kendo-react-animation-5.12.1.tgz"
+  "version" "5.12.1"
+  dependencies:
+    "@progress/kendo-react-common" "5.12.1"
+    "prop-types" "^15.6.0"
+    "react-transition-group" "4.4.2"
+
+"@progress/kendo-react-buttons@^5.0.0":
+  "integrity" "sha512-HrNAHtRYAZuZ+JfCYm2xP/vRp/LJriU2h8jXEmX7v7wP/AqcSfSf2YImrXTWhlydslxo4Q3o9o13htQqGbXGtA=="
+  "resolved" "https://registry.npmjs.org/@progress/kendo-react-buttons/-/kendo-react-buttons-5.12.1.tgz"
+  "version" "5.12.1"
+  dependencies:
+    "@progress/kendo-react-common" "5.12.1"
+    "@progress/kendo-react-popup" "5.12.1"
+    "prop-types" "^15.6.0"
+
+"@progress/kendo-react-charts@^5.12.1":
+  "integrity" "sha512-72DveCcTON6aTu319phAUDE3VkF/AJFcwdpsz3cnzdzjyRg0Q5eidF/ynxmZWR/i2xoJsv1SJs3COKvXWXTMWQ=="
+  "resolved" "https://registry.npmjs.org/@progress/kendo-react-charts/-/kendo-react-charts-5.12.1.tgz"
+  "version" "5.12.1"
+  dependencies:
+    "@progress/kendo-charts" "^1.27.0"
+    "@progress/kendo-react-common" "5.12.1"
+    "@progress/kendo-react-popup" "5.12.1"
+    "prop-types" "^15.6.0"
+
+"@progress/kendo-react-common@5.12.1":
+  "integrity" "sha512-s438HDJbyg/5nyJn6yDj4mnAqjEC0b8eVe2OsFj12BUHMVvXsXvh4HbDZGRQg+Y7G2ywPNakfXWrITAvlrq+WA=="
+  "resolved" "https://registry.npmjs.org/@progress/kendo-react-common/-/kendo-react-common-5.12.1.tgz"
+  "version" "5.12.1"
+  dependencies:
+    "@progress/kendo-draggable-common" "^0.2.3"
+    "prop-types" "^15.6.0"
+
+"@progress/kendo-react-dropdowns@^5.12.1":
+  "integrity" "sha512-5ZJTvn+f4XMNRyIBH+5HGISXv5E8pCA92xI9k7JYMzZlIRcZkeUmFJDrqXwMd/SYLDuK7mdHlUnBdzfdP+B6WQ=="
+  "resolved" "https://registry.npmjs.org/@progress/kendo-react-dropdowns/-/kendo-react-dropdowns-5.12.1.tgz"
+  "version" "5.12.1"
+  dependencies:
+    "@progress/kendo-react-common" "5.12.1"
+    "@progress/kendo-react-labels" "5.12.1"
+    "@progress/kendo-react-layout" "5.12.1"
+    "@progress/kendo-react-popup" "5.12.1"
+    "prop-types" "^15.6.0"
+
+"@progress/kendo-react-intl@^5.0.0":
+  "integrity" "sha512-SXCA90Zbyfl6O+0FI30vqQS2I9AkOxRzFNp8aDSv59As7/KhZV1XMEzvuUaEAe8W4GJGFct1/L2R4NdmoZUn0A=="
+  "resolved" "https://registry.npmjs.org/@progress/kendo-react-intl/-/kendo-react-intl-5.12.1.tgz"
+  "version" "5.12.1"
+  dependencies:
+    "@progress/kendo-intl" "^3.1.1"
+    "prop-types" "^15.6.0"
+
+"@progress/kendo-react-labels@5.12.1":
+  "integrity" "sha512-VsTygBNuQd3H3u8WEyTmqJDWc1s2b0UuXFgTQaNh+6ulU/cAWBXy/Bt67zpSnkrKsMIxO377WQ4ESTOGENMIjA=="
+  "resolved" "https://registry.npmjs.org/@progress/kendo-react-labels/-/kendo-react-labels-5.12.1.tgz"
+  "version" "5.12.1"
+  dependencies:
+    "@progress/kendo-react-common" "5.12.1"
+    "prop-types" "^15.6.0"
+
+"@progress/kendo-react-layout@5.12.1":
+  "integrity" "sha512-4YmYc26y76WvbuLv1U+A4infUeIvi5I79tV4H3OGlleOfO6YYP8qPl3DT8dIqVR4jKrAU1AwMW3mExFA9pYbeQ=="
+  "resolved" "https://registry.npmjs.org/@progress/kendo-react-layout/-/kendo-react-layout-5.12.1.tgz"
+  "version" "5.12.1"
+  dependencies:
+    "@progress/kendo-react-animation" "5.12.1"
+    "@progress/kendo-react-common" "5.12.1"
+    "@progress/kendo-react-popup" "5.12.1"
+    "prop-types" "^15.6.0"
+
+"@progress/kendo-react-popup@5.12.1":
+  "integrity" "sha512-SXlGA8UrGprMHn8nn09T9I1uITKQmMEoKWRlh1fyMtgD9cVMixKmR5vibcr7iwJM6hiL88LbqHz7FeMZfWboUw=="
+  "resolved" "https://registry.npmjs.org/@progress/kendo-react-popup/-/kendo-react-popup-5.12.1.tgz"
+  "version" "5.12.1"
+  dependencies:
+    "@progress/kendo-popup-common" "1.9.0"
+    "@progress/kendo-react-common" "5.12.1"
+    "prop-types" "^15.6.0"
+
+"@progress/kendo-react-progressbars@^5.0.0":
+  "integrity" "sha512-JHbNh4cJBnx8vRUdyHNL6IPupwePk+9no6Oz1Qxw7QvRcURJoIo33o5QNyxIcdBI9EnpLxF6uYchbTCrJWgY0g=="
+  "resolved" "https://registry.npmjs.org/@progress/kendo-react-progressbars/-/kendo-react-progressbars-5.12.1.tgz"
+  "version" "5.12.1"
+  dependencies:
+    "@progress/kendo-react-common" "5.12.1"
+    "prop-types" "^15.6.0"
+
+"@progress/kendo-react-treeview@^5.0.0":
+  "integrity" "sha512-VhdPywbGtAO2EdnpviP1ouayX4QvMheR0/taiXHtYAixKxhQhvHxiClU9Z5Pl3ru0fENcAnOXdT6cMCHhE7UJA=="
+  "resolved" "https://registry.npmjs.org/@progress/kendo-react-treeview/-/kendo-react-treeview-5.12.1.tgz"
+  "version" "5.12.1"
+  dependencies:
+    "@progress/kendo-react-common" "5.12.1"
+    "prop-types" "^15.6.0"
+
+"@progress/kendo-svg-icons@^1.0.0":
+  "integrity" "sha512-5Mi0AUk15zdTUWpQaAcqIw4q//K7pNx1JriMvt5kRw/hUx+/32u0ZlVAC3ma7BLW08MsX+01VtgqEZkldTsUlQ=="
+  "resolved" "https://registry.npmjs.org/@progress/kendo-svg-icons/-/kendo-svg-icons-1.4.2.tgz"
+  "version" "1.4.2"
+
+"@progress/pako-esm@^1.0.1":
+  "integrity" "sha512-O4A3b1EuE9Xe1pC3Xz9Tcn1M/CYrL71f4y/5TXeytOVTkmkzBgYW97fYP2f+54H0e0erWRaqV/kUUB/a8Uxfbw=="
+  "resolved" "https://registry.npmjs.org/@progress/pako-esm/-/pako-esm-1.0.1.tgz"
+  "version" "1.0.1"
+
 "@react-aria/ssr@^3.4.1":
   "integrity" "sha512-NmhoilMDyIfQiOSdQgxpVH2tC2u85Y0mVijtBNbI9kcDYLEiW/r6vKYVKtkyU+C4qobXhGMPfZ70PTc0lysSVA=="
   "resolved" "https://registry.npmjs.org/@react-aria/ssr/-/ssr-3.4.1.tgz"
@@ -1444,6 +1588,18 @@
   dependencies:
     "micromatch" "^3.1.4"
     "normalize-path" "^2.1.1"
+
+"apexcharts@^3.18.0":
+  "integrity" "sha512-BE5+WgIjnJgLlNPiIVqH47mzhSeSHfzg5jMUN1PVZ3fxM6ZL8WEB6aaNAh0l3c9K6PitimWo7xho48Zp7mBG2w=="
+  "resolved" "https://registry.npmjs.org/apexcharts/-/apexcharts-3.37.2.tgz"
+  "version" "3.37.2"
+  dependencies:
+    "svg.draggable.js" "^2.2.2"
+    "svg.easing.js" "^2.0.0"
+    "svg.filter.js" "^2.0.2"
+    "svg.pathmorphing.js" "^0.1.3"
+    "svg.resize.js" "^1.4.3"
+    "svg.select.js" "^3.0.1"
 
 "append-transform@^0.4.0":
   "integrity" "sha1-126/jKlNJ24keja61EpLdKthGZE= sha512-Yisb7ew0ZEyDtRYQ+b+26o9KbiYPFxwcsxKzbssigzRRMJ9LpExPVUg6Fos7eP7yP3q7///tzze4nm4lTptPBw=="
@@ -2201,6 +2357,11 @@
   "version" "2.0.0"
   dependencies:
     "node-int64" "^0.4.0"
+
+"buffer-equal-constant-time@1.0.1":
+  "integrity" "sha512-zRpUiDwd/xk6ADqPMATG8vc9VPrkck7T07OIx0gnjmJAnHnTVXNQG3vfvWNuiZIkwu9KrKdA1iJKfsfTVxE6NA=="
+  "resolved" "https://registry.npmjs.org/buffer-equal-constant-time/-/buffer-equal-constant-time-1.0.1.tgz"
+  "version" "1.0.1"
 
 "buffer-from@^1.0.0":
   "integrity" "sha512-MQcXEUbCKtEo7bhqEs6560Hyd4XaovZlO/k9V3hjVUF/zwW7KBVdSK4gIt/bzwS9MbR5qob+F5jusZsb0YQK2A=="
@@ -3828,6 +3989,13 @@
     "jsbn" "~0.1.0"
     "safer-buffer" "^2.1.0"
 
+"ecdsa-sig-formatter@1.0.11":
+  "integrity" "sha512-nagl3RYrbNv6kQkeJIpt6NJZy8twLB/2vtz6yN9Z4vRKHN4/QZJIEbqohALSgwKdnksuY3k5Addp5lg8sVoVcQ=="
+  "resolved" "https://registry.npmjs.org/ecdsa-sig-formatter/-/ecdsa-sig-formatter-1.0.11.tgz"
+  "version" "1.0.11"
+  dependencies:
+    "safe-buffer" "^5.0.1"
+
 "ee-first@1.1.1":
   "integrity" "sha1-WQxhFWsK4vTwJVcyoViyZrxWsh0= sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow=="
   "resolved" "https://registry.npmjs.org/ee-first/-/ee-first-1.1.1.tgz"
@@ -4887,6 +5055,11 @@
   "integrity" "sha512-QdH5qfLcdF209UsCdM0ZNZ9Dwm2PHvMfeLZtivBrjX3Y/df4US2pwsUC4HBfWhye/mx/t6puODeC7Oacb/Ol8g=="
   "resolved" "https://registry.npmjs.org/h2x-types/-/h2x-types-1.1.0.tgz"
   "version" "1.1.0"
+
+"hammerjs@^2.0.0":
+  "integrity" "sha512-tSQXBXS/MWQOn/RKckawJ61vvsDpCom87JgxiYdGwHdOa0ht0vzUWDlfioofFCRU0L+6NGDt6XzbgoJvZkMeRQ=="
+  "resolved" "https://registry.npmjs.org/hammerjs/-/hammerjs-2.0.8.tgz"
+  "version" "2.0.8"
 
 "handle-thing@^1.2.5":
   "integrity" "sha1-/Xqtcmvxpf0W38KbL3pmAdJxOcQ= sha512-Ld9EYcBflMUF6SsJLGDADVH50jSzLNIUUrOFlFGK/zwqimATg9+wY4jsLWCR7DZSxt2BfK0+liHUMdoR11bjLg=="
@@ -6354,6 +6527,16 @@
   "resolved" "https://registry.npmjs.org/jsonify/-/jsonify-0.0.0.tgz"
   "version" "0.0.0"
 
+"jsonwebtoken@^9.0.0":
+  "integrity" "sha512-tuGfYXxkQGDPnLJ7SibiQgVgeDgfbPq2k2ICcbgqW8WxWLBAxKQM/ZCu/IT8SOSwmaYl4dpTFCW5xZv7YbbWUw=="
+  "resolved" "https://registry.npmjs.org/jsonwebtoken/-/jsonwebtoken-9.0.0.tgz"
+  "version" "9.0.0"
+  dependencies:
+    "jws" "^3.2.2"
+    "lodash" "^4.17.21"
+    "ms" "^2.1.1"
+    "semver" "^7.3.8"
+
 "jsprim@^1.2.2":
   "integrity" "sha1-MT5mvB5cwG5Di8G3SZwuXFastqI= sha512-4Dj8Rf+fQ+/Pn7C5qeEX02op1WfOss3PKTE9Nsop3Dx+6UPxlm1dr/og7o2cRa5hNN07CACr4NFzRLtj/rjWog=="
   "resolved" "https://registry.npmjs.org/jsprim/-/jsprim-1.4.1.tgz"
@@ -6370,6 +6553,23 @@
   "version" "2.0.1"
   dependencies:
     "array-includes" "^3.0.3"
+
+"jwa@^1.4.1":
+  "integrity" "sha512-qiLX/xhEEFKUAJ6FiBMbes3w9ATzyk5W7Hvzpa/SLYdxNtng+gcurvrI7TbACjIXlsJyr05/S1oUhZrc63evQA=="
+  "resolved" "https://registry.npmjs.org/jwa/-/jwa-1.4.1.tgz"
+  "version" "1.4.1"
+  dependencies:
+    "buffer-equal-constant-time" "1.0.1"
+    "ecdsa-sig-formatter" "1.0.11"
+    "safe-buffer" "^5.0.1"
+
+"jws@^3.2.2":
+  "integrity" "sha512-YHlZCB6lMTllWDtSPHz/ZXTsi8S00usEV6v1tjq8tOUZzw7DpSDWVXjXDre6ed1w/pd495ODpHZYSdkRTsa0HA=="
+  "resolved" "https://registry.npmjs.org/jws/-/jws-3.2.2.tgz"
+  "version" "3.2.2"
+  dependencies:
+    "jwa" "^1.4.1"
+    "safe-buffer" "^5.0.1"
 
 "jwt-decode@^2.2.0":
   "integrity" "sha512-86GgN2vzfUu7m9Wcj63iUkuDzFNYFVmjeDm2GzWpUk+opB0pEpMsw6ePCMrhYkumz2C1ihqtZzOMAg7FiXcNoQ=="
@@ -6615,6 +6815,13 @@
   dependencies:
     "pseudomap" "^1.0.2"
     "yallist" "^2.1.2"
+
+"lru-cache@^6.0.0":
+  "integrity" "sha512-Jo6dJ04CmSjuznwJSS3pUeWmd/H0ffTlkXXgwZi+eq1UCmqQwCh+eLsYOYCwY991i2Fah4h1BEMCx4qThGbsiA=="
+  "resolved" "https://registry.npmjs.org/lru-cache/-/lru-cache-6.0.0.tgz"
+  "version" "6.0.0"
+  dependencies:
+    "yallist" "^4.0.0"
 
 "make-dir@^1.0.0":
   "integrity" "sha512-2w31R7SJtieJJnQtGc7RVL2StM2vGYVfqUOvUDxH6bC6aJTxPxTF0GnIgCyu7tjockiUWAYQRbxa7vKn34s5sQ=="
@@ -8340,7 +8547,7 @@
     "react-is" "^16.3.2"
     "warning" "^4.0.0"
 
-"prop-types@^15.0.0", "prop-types@^15.6.1", "prop-types@^15.6.2", "prop-types@^15.8.1", "prop-types@>= 15.5.10 < 16.0.0":
+"prop-types@^15.0.0", "prop-types@^15.5.7", "prop-types@^15.6.0", "prop-types@^15.6.1", "prop-types@^15.6.2", "prop-types@^15.8.1", "prop-types@>= 15.5.10 < 16.0.0":
   "integrity" "sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg=="
   "resolved" "https://registry.npmjs.org/prop-types/-/prop-types-15.8.1.tgz"
   "version" "15.8.1"
@@ -8513,6 +8720,13 @@
     "iconv-lite" "0.4.23"
     "unpipe" "1.0.0"
 
+"react-apexcharts@^1.4.0":
+  "integrity" "sha512-DrcMV4aAMrUG+n6412yzyATWEyCDWlpPBBhVbpzBC4PDeuYU6iF84SmExbck+jx5MUm4U5PM3/T307Mc3kzc9Q=="
+  "resolved" "https://registry.npmjs.org/react-apexcharts/-/react-apexcharts-1.4.0.tgz"
+  "version" "1.4.0"
+  dependencies:
+    "prop-types" "^15.5.7"
+
 "react-app-polyfill@^0.1.3":
   "integrity" "sha512-Fl5Pic4F15G05qX7RmUqPZr1MtyFKJKSlRwMhel4kvDLrk/KcQ9QbpvyMTzv/0NN5957XFQ7r1BNHWi7qN59Pw=="
   "resolved" "https://registry.npmjs.org/react-app-polyfill/-/react-app-polyfill-0.1.3.tgz"
@@ -8577,7 +8791,7 @@
     "strip-ansi" "4.0.0"
     "text-table" "0.2.0"
 
-"react-dom@^16.6.3", "react-dom@^16.8.0  || >=17.0.0 || >=18.0.0", "react-dom@^16.8.2 || ^17.0 || ^18.x", "react-dom@>= 16.8.0", "react-dom@>=16.14.0", "react-dom@>=16.3.0", "react-dom@>=16.6.0":
+"react-dom@^16.6.3", "react-dom@^16.8.0  || >=17.0.0 || >=18.0.0", "react-dom@^16.8.2 || ^17.0 || ^18.x", "react-dom@^16.8.2 || ^17.0.0 || ^18.0.0", "react-dom@>= 16.8.0", "react-dom@>=16.14.0", "react-dom@>=16.3.0", "react-dom@>=16.6.0":
   "integrity" "sha512-1gCeQXDLoIqMgqD3IO2Ah9bnf0w9kzhwN5q4FGnHZ67hBm9yePzB5JJAIQCc8x3pFnNlwFq4RidZggNAAkzWWw=="
   "resolved" "https://registry.npmjs.org/react-dom/-/react-dom-16.14.0.tgz"
   "version" "16.14.0"
@@ -8721,7 +8935,17 @@
     "loose-envify" "^1.4.0"
     "prop-types" "^15.6.2"
 
-"react@^0.14.0 || ^15.0.0 || ^16.0.0 || ^17.0.0", "react@^0.14.0 || ^15.0.0-0 || ^16.0.0-0", "react@^16.14.0", "react@^16.6.3", "react@^16.8.0  || >=17.0.0 || >=18.0.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^16.8.0 || ^17.0.0-rc.1 || ^18.0.0", "react@^16.8.2 || ^17.0 || ^18.x", "react@>= 16.14.0 < 19.0.0", "react@>= 16.8.0", "react@>=0.14.0", "react@>=15", "react@>=15.0.0", "react@>=16.14.0", "react@>=16.3.0", "react@>=16.6.0", "react@>=16.8.0":
+"react-transition-group@4.4.2":
+  "integrity" "sha512-/RNYfRAMlZwDSr6z4zNKV6xu53/e2BuaBbGhbyYIXTrmgu/bGHzmqOs7mJSJBHy9Ud+ApHx3QjrkKSp1pxvlFg=="
+  "resolved" "https://registry.npmjs.org/react-transition-group/-/react-transition-group-4.4.2.tgz"
+  "version" "4.4.2"
+  dependencies:
+    "@babel/runtime" "^7.5.5"
+    "dom-helpers" "^5.0.1"
+    "loose-envify" "^1.4.0"
+    "prop-types" "^15.6.2"
+
+"react@^0.14.0 || ^15.0.0 || ^16.0.0 || ^17.0.0", "react@^0.14.0 || ^15.0.0-0 || ^16.0.0-0", "react@^16.14.0", "react@^16.6.3", "react@^16.8.0  || >=17.0.0 || >=18.0.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^16.8.0 || ^17.0.0-rc.1 || ^18.0.0", "react@^16.8.2 || ^17.0 || ^18.x", "react@^16.8.2 || ^17.0.0 || ^18.0.0", "react@>= 16.14.0 < 19.0.0", "react@>= 16.8.0", "react@>=0.13", "react@>=0.14.0", "react@>=15", "react@>=15.0.0", "react@>=16.14.0", "react@>=16.3.0", "react@>=16.6.0", "react@>=16.8.0":
   "integrity" "sha512-0X2CImDkJGApiAlcf0ODKIneSwBPhqJawOa5wCtKbu7ZECrmS26NvtSILynQ66cgkT/RJ4LidJOc3bUESwmU8g=="
   "resolved" "https://registry.npmjs.org/react/-/react-16.14.0.tgz"
   "version" "16.14.0"
@@ -9256,6 +9480,13 @@
   "integrity" "sha512-RS9R6R35NYgQn++fkDWaOmqGoj4Ek9gGs+DPxNUZKuwE183xjJroKvyo1IzVFeXvUrvmALy6FWD5xrdJT25gMg=="
   "resolved" "https://registry.npmjs.org/semver/-/semver-5.6.0.tgz"
   "version" "5.6.0"
+
+"semver@^7.3.8":
+  "integrity" "sha512-NB1ctGL5rlHrPJtFDVIVzTyQylMLu9N9VICA6HSFJo8MCGVTMW6gfpicwKmmK/dAjTOrqu5l63JJOpDSrAis3A=="
+  "resolved" "https://registry.npmjs.org/semver/-/semver-7.3.8.tgz"
+  "version" "7.3.8"
+  dependencies:
+    "lru-cache" "^6.0.0"
 
 "send@0.16.2":
   "integrity" "sha512-E64YFPUssFHEFBvpbbjr44NCLtI1AohxQ8ZSiJjQLskAdKuriYEP6VyGEsRDH8ScozGpkaX1BGvhanqCwkcEZw=="
@@ -9855,6 +10086,61 @@
   dependencies:
     "has-flag" "^3.0.0"
 
+"svg.draggable.js@^2.2.2":
+  "integrity" "sha512-JzNHBc2fLQMzYCZ90KZHN2ohXL0BQJGQimK1kGk6AvSeibuKcIdDX9Kr0dT9+UJ5O8nYA0RB839Lhvk4CY4MZw=="
+  "resolved" "https://registry.npmjs.org/svg.draggable.js/-/svg.draggable.js-2.2.2.tgz"
+  "version" "2.2.2"
+  dependencies:
+    "svg.js" "^2.0.1"
+
+"svg.easing.js@^2.0.0":
+  "integrity" "sha512-//ctPdJMGy22YoYGV+3HEfHbm6/69LJUTAqI2/5qBvaNHZ9uUFVC82B0Pl299HzgH13rKrBgi4+XyXXyVWWthA=="
+  "resolved" "https://registry.npmjs.org/svg.easing.js/-/svg.easing.js-2.0.0.tgz"
+  "version" "2.0.0"
+  dependencies:
+    "svg.js" ">=2.3.x"
+
+"svg.filter.js@^2.0.2":
+  "integrity" "sha512-xkGBwU+dKBzqg5PtilaTb0EYPqPfJ9Q6saVldX+5vCRy31P6TlRCP3U9NxH3HEufkKkpNgdTLBJnmhDHeTqAkw=="
+  "resolved" "https://registry.npmjs.org/svg.filter.js/-/svg.filter.js-2.0.2.tgz"
+  "version" "2.0.2"
+  dependencies:
+    "svg.js" "^2.2.5"
+
+"svg.js@^2.0.1", "svg.js@^2.2.5", "svg.js@^2.4.0", "svg.js@^2.6.5", "svg.js@>=2.3.x":
+  "integrity" "sha512-ycbxpizEQktk3FYvn/8BH+6/EuWXg7ZpQREJvgacqn46gIddG24tNNe4Son6omdXCnSOaApnpZw6MPCBA1dODA=="
+  "resolved" "https://registry.npmjs.org/svg.js/-/svg.js-2.7.1.tgz"
+  "version" "2.7.1"
+
+"svg.pathmorphing.js@^0.1.3":
+  "integrity" "sha512-49HWI9X4XQR/JG1qXkSDV8xViuTLIWm/B/7YuQELV5KMOPtXjiwH4XPJvr/ghEDibmLQ9Oc22dpWpG0vUDDNww=="
+  "resolved" "https://registry.npmjs.org/svg.pathmorphing.js/-/svg.pathmorphing.js-0.1.3.tgz"
+  "version" "0.1.3"
+  dependencies:
+    "svg.js" "^2.4.0"
+
+"svg.resize.js@^1.4.3":
+  "integrity" "sha512-9k5sXJuPKp+mVzXNvxz7U0uC9oVMQrrf7cFsETznzUDDm0x8+77dtZkWdMfRlmbkEEYvUn9btKuZ3n41oNA+uw=="
+  "resolved" "https://registry.npmjs.org/svg.resize.js/-/svg.resize.js-1.4.3.tgz"
+  "version" "1.4.3"
+  dependencies:
+    "svg.js" "^2.6.5"
+    "svg.select.js" "^2.1.2"
+
+"svg.select.js@^2.1.2":
+  "integrity" "sha512-tH6ABEyJsAOVAhwcCjF8mw4crjXSI1aa7j2VQR8ZuJ37H2MBUbyeqYr5nEO7sSN3cy9AR9DUwNg0t/962HlDbQ=="
+  "resolved" "https://registry.npmjs.org/svg.select.js/-/svg.select.js-2.1.2.tgz"
+  "version" "2.1.2"
+  dependencies:
+    "svg.js" "^2.2.5"
+
+"svg.select.js@^3.0.1":
+  "integrity" "sha512-h5IS/hKkuVCbKSieR9uQCj9w+zLHoPh+ce19bBYyqF53g6mnPB8sAtIbe1s9dh2S2fCmYX2xel1Ln3PJBbK4kw=="
+  "resolved" "https://registry.npmjs.org/svg.select.js/-/svg.select.js-3.0.1.tgz"
+  "version" "3.0.1"
+  dependencies:
+    "svg.js" "^2.6.5"
+
 "svgo@^1.0.0", "svgo@^1.0.5":
   "integrity" "sha512-GBkJbnTuFpM4jFbiERHDWhZc/S/kpHToqmZag3aEBjPYK44JAN2QBjvrGIxLOoCyMZjuFQIfTO2eJd8uwLY/9g=="
   "resolved" "https://registry.npmjs.org/svgo/-/svgo-1.1.1.tgz"
@@ -10065,7 +10351,7 @@
   "resolved" "https://registry.npmjs.org/tryer/-/tryer-1.0.1.tgz"
   "version" "1.0.1"
 
-"tslib@^1.9.0":
+"tslib@^1.7.0", "tslib@^1.9.0":
   "integrity" "sha512-4krF8scpejhaOgqzBEcGM7yDIEfi0/8+8zDRZhNZZ2kjmHJ4hv3zCbQWxoJGz1iw5U0Jl0nma13xzHXcncMavQ=="
   "resolved" "https://registry.npmjs.org/tslib/-/tslib-1.9.3.tgz"
   "version" "1.9.3"
@@ -10814,6 +11100,11 @@
   "integrity" "sha1-HBH5IY8HYImkfdUS+TxmmaaoHVI= sha512-ncTzHV7NvsQZkYe1DW7cbDLm0YpzHmZF5r/iyP3ZnQtMiJ+pjzisCiMNI+Sj+xQF5pXhSHxSB3uDbsBTzY/c2A=="
   "resolved" "https://registry.npmjs.org/yallist/-/yallist-2.1.2.tgz"
   "version" "2.1.2"
+
+"yallist@^4.0.0":
+  "integrity" "sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A=="
+  "resolved" "https://registry.npmjs.org/yallist/-/yallist-4.0.0.tgz"
+  "version" "4.0.0"
 
 "yargs-parser@^10.1.0":
   "integrity" "sha512-VCIyR1wJoEBZUqk5PA+oOBF6ypbwh5aNB3I50guxAL/quggdfs4TtNHQrSazFA3fYZ+tEqfs0zIGlv0c/rgjbQ=="

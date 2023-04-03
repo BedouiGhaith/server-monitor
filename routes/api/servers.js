@@ -1,7 +1,4 @@
 const express = require('express');
-const app = express();
-const server = require('http').Server(app);
-const io = require('socket.io')(server);
 const router = express.Router();
 
 const User = require("../../models/User");
@@ -13,8 +10,8 @@ const { Client } = require('ssh2');
 
 const topparser = require("../../utils/topParser");
 const privParser = require("../../utils/privParser");
-const res = require("express/lib/response");
 const {parseMemoryInfo, parseGrepMemoryLog} = require("../../utils/ramLogParser");
+const {sendEmail} = require("../../config/mail");
 
 
 async function connectToSSHServer(server) {
@@ -239,7 +236,6 @@ router.post('/ramUsage', async (req, res) => {
         res.status(404).json(`SSH connection error: ${err.message}... Make sure you've entered the correct server info!`);
     }
 });
-
 
 
 module.exports = router;
