@@ -49,6 +49,6 @@ app.use("/api/servers", servers);
 
 const port = process.env.PORT || 5000;
 
-startMonitoring()
+//startMonitoring()
 
 app.listen(port, () => console.log(`Server up and running on port ${port} !`));

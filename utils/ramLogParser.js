@@ -22,6 +22,9 @@ const parseMemoryInfo = (output) => {
 };
 
 async function parseGrepMemoryLog(output) {
+    console.log("--------------------------------------------------------------------------------------------------------")
+
+    console.log(output)
     output = output.trim();
     output = removeLines(output, 5, 5);
     const logs = output.split("\n");
@@ -67,7 +70,8 @@ async function parseGrepMemoryLog(output) {
             }
             parsedLogs.push(parsedLog);
         }
-    }
+    }            console.log(parsedLogs)
+
     return parsedLogs;
 }
 
@@ -106,5 +110,5 @@ const removeLines = (str, n, m) => {
     return lines.join('\n');
 };
 
-module.exports = { parseMemoryInfo, parseGrepMemoryLog }
+module.exports = { parseMemoryInfo, parseGrepMemoryLog, removeLines }
 

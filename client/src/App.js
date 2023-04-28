@@ -18,6 +18,7 @@ import Server from "./components/dashboard/Server.js";
 
 import "./App.css";
 import RAMDashboard from "./components/dashboard/RAMDashboard.js";
+import packagesDashboard from "./components/dashboard/PackagesDashboard.js";
 
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
@@ -53,6 +54,7 @@ class App extends Component {
               <PrivateRoute exact path="/addServer" component={AddServer} />
               <PrivateRoute exact path="/server/:id" component={Server} />
               <PrivateRoute exact path="/RAM/:id" component={RAMDashboard} />
+              <PrivateRoute exact path="/packages/:id" component={packagesDashboard} />
             </Switch>
           </div>
         </Router>

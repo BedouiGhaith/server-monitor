@@ -4,3 +4,7 @@ export const GET_ERRORS = "GET_ERRORS";
 export const USER_LOADING = "USER_LOADING";
 export const SET_CURRENT_USER = "SET_CURRENT_USER";
 export const SET_SERVER_STATUS = "SET_SERVER_STATUS";
+export const SERVER_PACKAGES = "SERVER_PACKAGES";
+export const SERVER_INSTALL = "SERVER_INSTALL";
+
+

@@ -12,6 +12,7 @@ const topparser = require("../../utils/topParser");
 const privParser = require("../../utils/privParser");
 const {parseMemoryInfo, parseGrepMemoryLog} = require("../../utils/ramLogParser");
 const {sendEmail} = require("../../config/mail");
+const parsePackagesList = require("../../utils/packagesParser");
 
 
 async function connectToSSHServer(server) {
@@ -52,7 +53,7 @@ function executeSudoCommand(conn, option, res, sudoPass) {
                 stream.end(`${password}\n${option}\nexit\nexit\n`);
             } else {
                 output += data;
-
+                console.log(data.toString())
             }
         });
         stream.write(`su\n`);
@@ -80,9 +81,16 @@ async function cmdOption(conn, option, res, sudoPass) {
     } else if (option.startsWith('sudo -l')) {
         console.log('privileges');
         executeSudoCommand(conn, option, res);
+    } else if (option.startsWith('install')) {
+        let pckg = option.replace("install ", "");
+        console.log('ram var log');
+        await installPackage(conn, pckg, res, sudoPass);
+    }else if (option.startsWith('get packages')) {
+        console.log('ram var log');
+        await getAllPackages(conn, res, sudoPass);
     } else {
-        res.status(404).json(`NO OPTION FOR ${option}.`);
-        console.log(`NO OPTION FOR ${option}.`);
+        console.log(`${option}.`);
+        executeSudoCommand(conn, option, res);
     }
 }
 
@@ -127,7 +135,61 @@ function parser(data, option){
         data.replaceAll("STDOUT: ","")
         return parseGrepMemoryLog(data.toString());
     }
+    if (option.startsWith('yum list available')) {
+        console.log('ram var log');
+        return parsePackagesList(data.toString())
+    }
     return {"data":data}
+}
+function getPackageInfo(conn, option, sudoPass) {
+    console.log(option);
+    const password = sudoPass;
+    let output = Buffer.alloc(0);
+
+    return new Promise((resolve, reject) => {
+        conn.shell((err, stream) => {
+            if (err) {
+                console.log(`Command execution error: ${err.message}`);
+                reject(err);
+            }
+            stream.on('end', () => {
+                console.log(`Command execution ended`);
+                console.log(output.toString());
+                resolve(output.toString());
+            }).on('data', (data) => {
+                if (data.indexOf('Password') > -1) {
+                    stream.end(`${password}\n${option}\nexit\nexit\n`);
+                } else {
+                    output = Buffer.concat([output, data]);
+                }
+            });
+            stream.write(`su\n`);
+        });
+    });
+}
+
+
+async function installPackage(conn, package_name, res, sudoPass) {
+    const distro_info = await getPackageInfo(conn, 'ls /etc/*-release', sudoPass)
+    const pkg = package_name.split(' ').slice(1).join(' ')
+    if (distro_info.toLowerCase().includes('debian')) {
+        await executeSudoCommand(conn, `apt-get update -y && apt-get install ${pkg} -y`,res, sudoPass);
+    } else if (distro_info.toLowerCase().includes('red hat') || distro_info.toLowerCase().includes('centos')) {
+        await executeSudoCommand(conn, `yum install ${package_name} -y`,res, sudoPass);
+    } else {
+        console.log('Unsupported distribution');
+    }
+}
+
+async function getAllPackages(conn, res, sudoPass) {
+    const distro_info = await getPackageInfo(conn, 'ls /etc/*-release', sudoPass)
+    if (distro_info.toLowerCase().includes('debian')) {
+        await executeSudoCommand(conn, `dpkg --get-selections`,res, sudoPass);
+    } else if (distro_info.toLowerCase().includes('red hat') || distro_info.toLowerCase().includes('centos')) {
+        await executeSudoCommand(conn, 'yum list available | grep -v installed | tr -s \' \' | cut -d \' \' -f1\n',res, sudoPass);
+    } else {
+        console.log('Unsupported distribution');
+    }
 }
 
 router.post("/add_server", (req, res) => {
